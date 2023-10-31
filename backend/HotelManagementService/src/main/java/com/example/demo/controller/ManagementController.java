@@ -20,6 +20,8 @@ import com.example.demo.entity.ManagementPk;
 import com.example.demo.exception.RecordNotFoundException;
 import com.example.demo.service.HotelManagementService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/hotelmanagement")
 public class ManagementController {
@@ -36,7 +38,7 @@ public class ManagementController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<?> createManagement(@RequestBody ManagementDto obj) {
+	public ResponseEntity<?> createManagement(@Valid @RequestBody ManagementDto obj) {
 		System.out.println("obj.tostring"+obj.toString());
 	    return new ResponseEntity<>(managementService.createUser(obj), HttpStatus.ACCEPTED);
 	}

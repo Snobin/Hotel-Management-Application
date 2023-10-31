@@ -46,8 +46,8 @@ public class ManagementSpec {
 		            }
 		            
 		            if(!StringUtils.isEmpty(name)) {
-		            	Predicate userNamePredicate = criteriaBuilder.equal(root.get("managepkobj").get("name"), name);
-
+		            	Predicate userNamePredicate = criteriaBuilder.like(criteriaBuilder.upper(root.get("managepkobj").get("name")),"%"+name.toUpperCase()+"%");
+		            	
 		            	if(finalPredicate!=null) {
 		            		finalPredicate = criteriaBuilder.and(finalPredicate, userNamePredicate);
 		            	}else {
@@ -66,7 +66,7 @@ public class ManagementSpec {
 		            }
 		            
 		            if(!StringUtils.isEmpty(id)) {
-		            	Predicate userIdPredicate = criteriaBuilder.equal(root.get("managepkobj").get("id"), id);
+		            	Predicate userIdPredicate = criteriaBuilder.like(root.get("managepkobj").get("id"), id);
 		            	if(finalPredicate!=null) {
 		            		finalPredicate = criteriaBuilder.and(finalPredicate, userIdPredicate);
 		            	}else {

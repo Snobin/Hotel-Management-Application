@@ -1,0 +1,158 @@
+package com.example.demo.service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.ManagementDto;
+import com.example.demo.dto.ServiceResponse;
+import com.example.demo.entity.ManagementEntity;
+import com.example.demo.entity.ManagementPk;
+import com.example.demo.exception.RecordNotFoundException;
+import com.example.demo.repository.HotelManagementRepository;
+import com.example.demo.repository.specifiation.ManagementSpec;
+import com.example.demo.util.Constants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+@Service
+public class HotelManageSerImplementation implements HotelManagementService{
+	
+	@Autowired
+	private HotelManagementRepository managementRepository;
+	@Autowired
+	MessageSource messageSource;
+	
+	private static Logger logger = LogManager.getLogger(HotelManageSerImplementation.class);
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public JSONObject getData(String param) {
+	    System.out.println("service reached");
+
+	    JSONObject result = new JSONObject();
+	    Specification<ManagementEntity> spec = ManagementSpec.getManagementSpec(param); // Assuming you have a custom specification class for ManagementEntity
+	    List<ManagementEntity> managementEntities = managementRepository.findAll(spec);
+	    
+	    JSONArray array = new JSONArray();
+	    for (ManagementEntity entity : managementEntities) {
+	        JSONObject obj = new JSONObject();
+	        ManagementPk pk = entity.getManagepkobj();
+	        obj.put("id", pk.getId());
+	        obj.put("name", pk.getName());
+	        obj.put("address", entity.getAddress());
+	        obj.put("phone_number", entity.getPhoneNumber());
+	        obj.put("date", entity.getDate());
+	        obj.put("ac_or_non_ac", entity.getAcOrNonAc());
+	        obj.put("age", entity.getAge());
+	        obj.put("status", entity.getStatus());
+	        array.add(obj);
+	    }
+
+	    result.put("aaData", array);
+	    
+	    return result;
+	}
+	
+	@Override
+	public ServiceResponse createUser(ManagementDto obj) {
+
+	    ManagementPk managementPk = new ManagementPk();
+
+	    managementPk.setId(obj.getId());
+	    managementPk.setName(obj.getName());
+
+	    ManagementEntity managementEntity = new ManagementEntity();
+
+	    managementEntity.setAddress(obj.getAddress());
+	    managementEntity.setPhoneNumber(obj.getPhoneNumber());
+	    managementEntity.setDate(obj.getDate());
+	    managementEntity.setAcOrNonAc(obj.getAcOrNonAc());
+	    managementEntity.setAge(obj.getAge());
+	    managementEntity.setStatus("PROCESSD");
+	    managementEntity.setCreatedBy(getUsername());
+	    managementEntity.setVerifiedBy(null);
+	    managementEntity.setModifiedBy(getUsername()); 
+	    managementEntity.setVerifiedDate(null);
+	    managementEntity.setCreatedDate(new Date());
+	    managementEntity.setModifiedDate(new Date()); 
+
+	    managementEntity.setManagepkobj(managementPk);
+
+	    managementRepository.save(managementEntity);
+
+	    return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS,null, null);
+	}
+	
+	
+	@Override
+	public ResponseEntity<ManagementEntity> getById(ManagementPk obj) {
+	    Optional<ManagementEntity> managementEntity = managementRepository.findById(obj);
+
+	    if (!managementEntity.isPresent()) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+
+	    return new ResponseEntity<>(managementEntity.get(), HttpStatus.ACCEPTED);
+	}
+	
+	
+	public ServiceResponse updateManagement(ManagementDto dtoobj) throws RecordNotFoundException {
+	    ManagementPk compositeKey = new ManagementPk();
+	    compositeKey.setId(dtoobj.getId());
+	    compositeKey.setName(dtoobj.getName());
+
+	    Optional<ManagementEntity> optionalManagementEntity = managementRepository.findById(compositeKey);
+	    
+	    if (!optionalManagementEntity.isPresent()) {
+	        throw new RecordNotFoundException("user.details.psh.VAL0001");
+	    }
+	    
+	    ManagementEntity existingManagementEntity = optionalManagementEntity.get();
+	    
+	    try {
+	        existingManagementEntity.setAddress(dtoobj.getAddress());
+	        existingManagementEntity.setPhoneNumber(dtoobj.getPhoneNumber());
+	        existingManagementEntity.setDate(dtoobj.getDate());
+	        existingManagementEntity.setAcOrNonAc(dtoobj.getAcOrNonAc());
+	        existingManagementEntity.setAge(dtoobj.getAge());
+	        existingManagementEntity.setStatus(Constants.MESSAGE_STATUS.PROCESSED);
+	        existingManagementEntity.setModifiedBy(getUsername());
+	        existingManagementEntity.setModifiedDate(new Date());
+
+	        managementRepository.save(existingManagementEntity);
+
+	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS,
+	            null, null);
+	    } catch (RecordNotFoundException e) {
+	        throw e;
+	    } catch (Exception e) {
+	        logger.error("Error: " + e.getMessage(), e);
+	        return new ServiceResponse("Error",null, null);
+	    }
+	}
+
+
+
+	public String getUsername() {
+		return "manager";
+	}
+
+	@Override
+	public ServiceResponse deleteManagement(ManagementPk obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}

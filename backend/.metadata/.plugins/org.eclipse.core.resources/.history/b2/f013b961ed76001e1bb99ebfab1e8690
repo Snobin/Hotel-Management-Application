@@ -1,0 +1,42 @@
+package com.example.demo.exception;
+
+public class Snippet {
+	@Override
+	public ServiceResponse updateManagement(ManagementDTO dtoobj) throws RecordNotFoundException {
+	    ManagementPk compositeKey = new ManagementPk();
+	    compositeKey.setId(dtoobj.getId());
+	    compositeKey.setName(dtoobj.getName());
+	
+	    Optional<ManagementEntity> optionalManagementEntity = managementRepository.findById(compositeKey);
+	    
+	    if (!optionalManagementEntity.isPresent()) {
+	        throw new RecordNotFoundException("user.details.psh.VAL0001");
+	    }
+	    
+	    ManagementEntity existingManagementEntity = optionalManagementEntity.get();
+	    
+	    try {
+	        existingManagementEntity.setAddress(dtoobj.getAddress());
+	        existingManagementEntity.setPhoneNumber(dtoobj.getPhoneNumber());
+	        existingManagementEntity.setDate(dtoobj.getDate());
+	        existingManagementEntity.setAcOrNonAc(dtoobj.getAcOrNonAc());
+	        existingManagementEntity.setAge(dtoobj.getAge());
+	        existingManagementEntity.setStatus(Constants.MESSAGE_STATUS.PROCESSED);
+	        existingManagementEntity.setModifiedBy(getUserName());
+	        existingManagementEntity.setModifiedDate(new Date());
+	
+	        managementRepository.save(existingManagementEntity);
+	
+	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS,
+	            messageSource.getMessage("user.details.psh.VAL0007", null, LocaleContextHolder.getLocale()), null);
+	    } catch (RecordNotFoundException e) {
+	        throw e;
+	    } catch (Exception e) {
+	        logger.error("Error: " + e.getMessage(), e);
+	        return new ServiceResponse("user.details.psh.VAL0006",
+	            messageSource.getMessage("user.details.psh.VAL0006", null, LocaleContextHolder.getLocale()), null);
+	    }
+	}
+	
+}
+

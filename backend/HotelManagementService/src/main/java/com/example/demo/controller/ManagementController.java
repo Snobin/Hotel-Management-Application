@@ -46,7 +46,7 @@ public class ManagementController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<?> updateManagement(@RequestBody ManagementDto obj) {
+	public ResponseEntity<?> updateManagement(@Valid @RequestBody ManagementDto obj) {
 		return new ResponseEntity<>(managementService.updateManagement(obj), HttpStatus.ACCEPTED);
 	}
 

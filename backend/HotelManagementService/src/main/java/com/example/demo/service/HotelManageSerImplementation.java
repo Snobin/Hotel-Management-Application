@@ -178,7 +178,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	        managementRepository.save(existingManagementEntity);
 
 	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS,
-	            null, null);
+	            "Updated Successfully", null);
 	    } catch (RecordUpdateException e) {
 	        throw e;
 	    } catch (Exception e) {

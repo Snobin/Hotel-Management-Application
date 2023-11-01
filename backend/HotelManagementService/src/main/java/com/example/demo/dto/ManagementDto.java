@@ -24,7 +24,7 @@ public class ManagementDto {
 	@CustomSize(minKey = "usersDto.phoneNumber.min", maxKey = "usersDto.phoneNumber.max", message = "{CustomSize.managementDto.phoneNumber}")
 	private String phoneNumber;
 
-	@NotNull(message = "{NotNull.managementDto.logdate}")
+//	@NotNull(message = "{NotNull.managementDto.logdate}")
 	private String logdate;
 
 	@NotNull(message = "{NotNull.managementDto.acOrNonAc}")

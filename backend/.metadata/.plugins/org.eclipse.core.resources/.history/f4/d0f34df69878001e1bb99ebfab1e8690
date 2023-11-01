@@ -20,7 +20,7 @@ Prod_1.0.0
 *****************************************************************************/
 package com.example.demo.exception;
 
-public class RecordUpdateException extends RuntimeException {
+public class RecordUpdateException extends Exception {
 
 	public RecordUpdateException() {
 		super();

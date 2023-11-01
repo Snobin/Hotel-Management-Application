@@ -28,7 +28,7 @@ public class ManagementController {
 
 	@GetMapping
 	public ResponseEntity<JSONObject> getdata(@RequestParam("searchParam") String searchParam) {
-//		System.out.println("searchparam=" + searchParam);
+		System.out.println("searchparam=" + searchParam);
 
 		JSONObject data = managementService.getData(searchParam);
 		return new ResponseEntity<>(data, HttpStatus.OK);

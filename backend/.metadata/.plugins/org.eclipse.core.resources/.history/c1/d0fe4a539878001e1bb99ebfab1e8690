@@ -21,7 +21,6 @@ import com.example.demo.dto.ServiceResponse;
 import com.example.demo.entity.ManagementEntity;
 import com.example.demo.entity.ManagementPk;
 import com.example.demo.exception.RecordNotFoundException;
-import com.example.demo.exception.RecordUpdateException;
 import com.example.demo.repository.HotelManagementRepository;
 import com.example.demo.repository.specifiation.ManagementSpec;
 import com.example.demo.util.Constants;
@@ -42,7 +41,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public JSONObject getData(String param) {
-//	    System.out.println("service reached");
+	    System.out.println("service reached");
 
 	    JSONObject result = new JSONObject();
 	    Specification<ManagementEntity> spec = ManagementSpec.getManagementSpec(param);
@@ -152,7 +151,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 
 	
 	@Override
-	public ServiceResponse updateManagement(ManagementDto dtoobj) throws RecordUpdateException {
+	public ServiceResponse updateManagement(ManagementDto dtoobj) throws RecordNotFoundException {
 	    ManagementPk compositeKey = new ManagementPk();
 	    compositeKey.setId(dtoobj.getId());
 	    compositeKey.setName(dtoobj.getName());
@@ -179,11 +178,11 @@ public class HotelManageSerImplementation implements HotelManagementService{
 
 	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS,
 	            null, null);
-	    } catch (RecordUpdateException e) {
+	    } catch (RecordNotFoundException e) {
 	        throw e;
 	    } catch (Exception e) {
 	        logger.error("Error: " + e.getMessage(), e);
-	        return new ServiceResponse("Error","An error occurred while updating the record.", null);
+	        return new ServiceResponse("Error",null, null);
 	    }
 	}
 
@@ -200,7 +199,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	            managementRepository.save(managementEntity);
 	            return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS, null, null);
 	        } else {
-	            return new ServiceResponse("Error", "An error occurred while deleting the record.", null);
+	            return new ServiceResponse("Error", null, null);
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace(); 
@@ -216,7 +215,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	        Optional<ManagementEntity> optionalManagementEntity = managementRepository.findById(compositeKey);
 
 	        if (!optionalManagementEntity.isPresent()) {
-	            throw new RecordNotFoundException("No Record Found");
+	            throw new RecordNotFoundException("user.details.psh.VAL0001");
 	        } else {
 	            ManagementEntity managementEntity = optionalManagementEntity.get();
 
@@ -239,7 +238,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	            managementEntity.setModifiedDate(new Date());
 	            managementRepository.save(managementEntity);
 	        }
-	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS, "Record Verified Successfully", null);
+	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS, null, null);
 	    } catch (Exception e) {
 	        e.printStackTrace(); 
 	        return new ServiceResponse(Constants.MESSAGE_STATUS.FAILED, "An error occurred", null);

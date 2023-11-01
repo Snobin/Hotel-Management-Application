@@ -5,10 +5,9 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.demo.dto.ManagementDto;
 import com.example.demo.dto.ServiceResponse;
-import com.example.demo.entity.ManagementEntity;
 import com.example.demo.entity.ManagementPk;
 import com.example.demo.exception.RecordNotFoundException;
-import com.example.demo.exception.RecordUpdateException;
+import com.example.demo.entity.ManagementEntity;
 
 public interface HotelManagementService {
 
@@ -18,7 +17,7 @@ public interface HotelManagementService {
 
 	ResponseEntity<ManagementEntity> getById(ManagementPk obj);
 
-	ServiceResponse updateManagement(ManagementDto obj) throws RecordUpdateException;
+	ServiceResponse updateManagement(ManagementDto obj) throws RecordNotFoundException;
 
 	ServiceResponse deleteManagement(ManagementPk obj)  throws RecordNotFoundException;
 	

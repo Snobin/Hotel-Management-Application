@@ -126,7 +126,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 
 	        managementRepository.save(managementEntity);
 
-	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS, "Record Created Successfully", null);
+	        return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS, null, null);
 	    } catch (Exception e) {
 	        e.printStackTrace(); 
 	        return new ServiceResponse(Constants.MESSAGE_STATUS.FAILED, "An error occurred while creating the user.", null);
@@ -198,9 +198,9 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	            ManagementEntity managementEntity = optionalManagementEntity.get();
 	            managementEntity.setStatus(Constants.MESSAGE_STATUS.DELETED);
 	            managementRepository.save(managementEntity);
-	            return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS, "Deleted successfully", null);
+	            return new ServiceResponse(Constants.MESSAGE_STATUS.SUCCESS, null, null);
 	        } else {
-	            return new ServiceResponse(Constants.MESSAGE_STATUS.FAILED, "An error occurred while deleting the record.", null);
+	            return new ServiceResponse("Error", "An error occurred while deleting the record.", null);
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace(); 

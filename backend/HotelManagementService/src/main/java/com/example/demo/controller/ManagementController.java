@@ -36,7 +36,7 @@ public class ManagementController {
 
 	@PostMapping("/create")
 	public ResponseEntity<?> createManagement(@Valid @RequestBody ManagementDto obj) {
-		System.out.println("obj.tostring" + obj.toString());
+//		System.out.println("obj.tostring" + obj.toString());
 		return new ResponseEntity<>(managementService.createUser(obj), HttpStatus.ACCEPTED);
 	}
 
@@ -52,7 +52,7 @@ public class ManagementController {
 
 	@PostMapping("/delete")
 	public ResponseEntity<?> deleteManagement(@RequestBody ManagementPk obj) {
-		System.out.println("hello");
+//		System.out.println("hello");
 		return new ResponseEntity<>(managementService.deleteManagement(obj), HttpStatus.ACCEPTED);
 	}
 

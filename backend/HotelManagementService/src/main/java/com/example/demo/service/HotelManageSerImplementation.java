@@ -45,7 +45,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 
 	    JSONObject result = new JSONObject();
 	    Specification<ManagementEntity> spec = ManagementSpec.getManagementSpec(param);
-	    System.out.println("spec" + spec.toString()); // Assuming you have a custom specification class for ManagementEntity
+//	    System.out.println("spec" + spec.toString()); // Assuming you have a custom specification class for ManagementEntity
 	    
 	    List<ManagementEntity> managementEntities = new ArrayList<>();
 	    JSONArray countByStatus = new JSONArray();
@@ -103,7 +103,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	public ServiceResponse createUser(ManagementDto obj) {
 		System.out.println("createuser");
 	    try {
-	    	System.out.println(obj.toString()+"anc");
+//	    	System.out.println(obj.toString()+"anc");
 	        ManagementPk managementPk = new ManagementPk();
 	        managementPk.setId(obj.getId());
 	        managementPk.setName(obj.getName());

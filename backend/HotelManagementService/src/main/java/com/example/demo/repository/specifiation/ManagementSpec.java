@@ -25,11 +25,11 @@ public class ManagementSpec {
 				Predicate finalPredicate = null;
 				JSONParser parser = new JSONParser();
 				JSONObject searchObject;
-				System.out.println("search"+searchParam);
+//				System.out.println("search"+searchParam);
 				try {
-					System.out.println("efgdbgd"+searchParam);
+//					System.out.println("efgdbgd"+searchParam);
 					searchObject = (JSONObject) parser.parse(searchParam);
-					System.out.println("searchObject: " + searchObject); // Add this line for debugging
+//					System.out.println("searchObject: " + searchObject); // Add this line for debugging
 					String id = (String) searchObject.get(Constants.USER_ID);
 					String name = (String) searchObject.get(Constants.USER_NAME);
 					String date=(String) searchObject.get(Constants.USER_DATE);

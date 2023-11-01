@@ -1,0 +1,2 @@
+NotNull.managementDto.id=user id cannot be empty
+NotNull.managementDto.name=user name cannot be empty

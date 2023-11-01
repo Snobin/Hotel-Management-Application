@@ -66,7 +66,7 @@ public class ManagementSpec {
 		            }
 		            
 		            if(!StringUtils.isEmpty(id)) {
-		            	Predicate userIdPredicate = criteriaBuilder.like(root.get("managepkobj").get("id"), id);
+		            	Predicate userIdPredicate = criteriaBuilder.like(criteriaBuilder.upper(root.get("managepkobj").get("id")),"%"+id.toUpperCase()+"%");
 		            	if(finalPredicate!=null) {
 		            		finalPredicate = criteriaBuilder.and(finalPredicate, userIdPredicate);
 		            	}else {

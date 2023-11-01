@@ -159,7 +159,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	    Optional<ManagementEntity> optionalManagementEntity = managementRepository.findById(compositeKey);
 	    
 	    if (!optionalManagementEntity.isPresent()) {
-	        throw new RecordNotFoundException("user.details.psh.VAL0001");
+	        throw new RecordNotFoundException("No Record with with Key");
 	    }
 	    
 	    ManagementEntity existingManagementEntity = optionalManagementEntity.get();
@@ -167,7 +167,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 	    try {
 	        existingManagementEntity.setAddress(dtoobj.getAddress());
 	        existingManagementEntity.setPhoneNumber(dtoobj.getPhoneNumber());
-	        existingManagementEntity.setDate(dtoobj.getLogdate());
+//	        existingManagementEntity.setDate(dtoobj.getLogdate());
 	        existingManagementEntity.setAcOrNonAc(dtoobj.getAcOrNonAc());
 	        existingManagementEntity.setAge(dtoobj.getAge());
 	        existingManagementEntity.setStatus(Constants.MESSAGE_STATUS.PROCESSED);
@@ -251,7 +251,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 
 
 	public String getUsername() {
-		return "maagr";
+		return "manager";
 	}
 
 }

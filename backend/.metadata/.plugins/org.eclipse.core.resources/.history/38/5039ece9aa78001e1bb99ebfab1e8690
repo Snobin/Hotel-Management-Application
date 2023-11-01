@@ -252,7 +252,7 @@ public class HotelManageSerImplementation implements HotelManagementService{
 
 
 	public String getUsername() {
-		return "manger";
+		return "manager";
 	}
 
 }

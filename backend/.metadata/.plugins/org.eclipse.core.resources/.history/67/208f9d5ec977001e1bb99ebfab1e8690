@@ -1,0 +1,67 @@
+package com.example.demo.dto;
+
+public class ManagementDto {
+	
+	
+	private String id;
+    private String name; 
+    private String address;
+    private String phoneNumber;
+    private String date;
+    private String acOrNonAc;
+    private String age;
+    
+    
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getAcOrNonAc() {
+		return acOrNonAc;
+	}
+	public void setAcOrNonAc(String acOrNonAc) {
+		this.acOrNonAc = acOrNonAc;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}
+	
+	@Override
+	public String toString() {
+		return "ManagementDto [id=" + id + ", name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber
+				+ ", date=" + date + ", acOrNonAc=" + acOrNonAc + ", age=" + age + "]";
+	}
+    
+	
+    
+
+}

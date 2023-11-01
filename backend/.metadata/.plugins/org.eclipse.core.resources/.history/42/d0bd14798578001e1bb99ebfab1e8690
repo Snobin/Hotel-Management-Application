@@ -1,0 +1,9 @@
+NotNull.managementDto.id = user id cannot be empty
+NotNull.managementDto.name = user name cannot be empty
+NotNull.managementDto.address = Address is required
+NotNull.managementDto.phoneNumber = Phone number is required
+NotNull.managementDto.logdate = Log date is required
+NotNull.managementDto.acOrNonAc = AC/Non-AC is required
+NotNull.managementDto.age = Age is required
+Pattern.managementDto.phoneNumber = Invalid phone number format
+Pattern.managementDto.age = Invalid age format

@@ -1,0 +1,37 @@
+# Custom validation messages for NotNull annotation
+NotNull.managementDto.id = User ID cannot be empty
+NotNull.managementDto.name = User name cannot be empty
+NotNull.managementDto.address = Address is required
+NotNull.managementDto.phoneNumber = Phone number is required
+NotNull.managementDto.logdate = Log date is required
+NotNull.managementDto.acOrNonAc = AC/Non-AC is required
+NotNull.managementDto.age = Age is required
+
+# Custom validation messages for Pattern annotation
+Pattern.managementDto.phoneNumber = Invalid phone number format
+Pattern.managementDto.age = Invalid age format
+
+# Custom validation messages for CustomSize annotation
+CustomSize.managementDto.id = User ID must be between {usersDto.userId.min} and {usersDto.userId.max} characters long
+CustomSize.managementDto.name = User name must be between {usersDto.name.min} and {usersDto.name.max} characters long
+CustomSize.managementDto.address = Address must be between {usersDto.address.min} and {usersDto.address.max} characters long
+CustomSize.managementDto.phoneNumber = Phone number must be between {usersDto.phoneNumber.min} and {usersDto.phoneNumber.max} characters long
+CustomSize.managementDto.logdate = Log date must be between {usersDto.logdate.min} and {usersDto.logdate.max} characters long
+CustomSize.managementDto.acOrNonAc = AC/Non-AC must be between {usersDto.acOrNonAc.min} and {usersDto.acOrNonAc.max} characters long
+CustomSize.managementDto.age = Age must be between {usersDto.age.min} and {usersDto.age.max} characters long
+
+# Minimum and maximum length values for each field
+usersDto.userId.min = 1
+usersDto.userId.max = 50
+usersDto.name.min = 1
+usersDto.name.max = 100
+usersDto.address.min = 1
+usersDto.address.max = 255
+usersDto.phoneNumber.min = 10
+usersDto.phoneNumber.max = 15
+usersDto.logdate.min = 10
+usersDto.logdate.max = 15
+usersDto.acOrNonAc.min = 2
+usersDto.acOrNonAc.max = 10
+usersDto.age.min = 1
+usersDto.age.max = 3

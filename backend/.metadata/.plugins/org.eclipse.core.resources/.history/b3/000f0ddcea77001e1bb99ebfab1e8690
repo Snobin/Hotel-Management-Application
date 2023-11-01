@@ -1,0 +1,308 @@
+package com.example.demo.validation;
+
+public class Snippet {
+	<app-tab [data]="tabdata" *ngIf="screenPermissions.dspFl == 'Y'"></app-tab>
+	<input type="hidden" id="id-screen" value="SECAcUSR">
+	
+	
+	<input type="hidden" id="hidden_login-type" value="2">
+	<input type="hidden" id="login_user_type_hidden" value="1">
+	
+	<section class="content" id="id-enter">
+	
+	    <div class="row" *ngIf="screenPermissions.dspFl == 'Y'">
+	        <div class="col-md-12">
+	            <div class="card ipsh-card">
+	                <div class="card-header">
+	                    <h3 class="card-title">
+	                        <i class="far fa-user mr-2 fa-icon-gradient-default"></i>{{ 'SECUSER.SEARCH.LABEL' | translate }}
+	                    </h3>
+	
+	                    <div class="card-tools">
+	                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+	                            <i class="fas fa-minus"></i>
+	                        </button>
+	                    </div>
+	                </div>
+	                <!-- /.card-header -->
+	                <div class="card-body">
+	                    <div class="row">
+	                        <div class="col-md-6">
+	                            <div class="form-group">
+	                                <label for="userId">{{ 'SECUSER.SEARCH.USER_ID' | translate }}</label>
+	                                <input type="text" class="form-control" id="idUserId"  [placeholder]="'SECUSER.SEARCH.USER_ID' | translate" value="">
+	                            </div>
+	                            <!-- /.form-group -->
+	                            <div class="form-group">
+	                                <label for="userName">{{ 'SECUSER.SEARCH.USER_NAME' | translate }}</label>
+	                                <!-- <input type="text" class="form-control" id="idUserName" placeholder="User Name" value=""> -->
+	                                <input type="text" class="form-control" id="idUserName"  [placeholder]="'SECUSER.SEARCH.USER_NAME' | translate" value="" [(ngModel)]="securityUser.userName">
+	                            </div>
+	                            <!-- /.form-group -->
+	                        </div>
+	                        <!-- /.col -->
+	                        <div class="col-md-6">
+	                            <div class="form-group">
+	                                <label for="userType">{{ 'SECUSER.SEARCH.USER_TYPE.LABEL' | translate }}</label>
+	                                <!-- <select class="select2" multiple="multiple"
+	                                                data-placeholder="Select a State" style="width: 100%;">
+	                                                <option>Alabama</option>
+	                                                <option>Alaska</option>
+	                                                <option>California</option>
+	                                                <option>Delaware</option>
+	                                                <option>Tennessee</option>
+	                                                <option>Texas</option>
+	                                                <option>Washington</option>
+	                                            </select> -->
+	                                <select class="form-control select2" id="idUserType">
+	                                    <option value="" selected="selected">{{ 'SECUSER.SEARCH.USER_TYPE.SELECT' | translate }}</option>
+	                                    <option value="1">{{ 'SECUSER.SEARCH.USER_TYPE.BANK' | translate }}</option>
+	                                    <option value="2">{{ 'SECUSER.SEARCH.USER_TYPE.CORPORATE' | translate }}</option>
+	                                </select>
+	                            </div>
+	                            <!-- /.form-group -->
+	                            <div class="form-group">
+	                                <label for="groupStatus">{{ 'SECUSER.SEARCH.STATUS.LABEL' | translate }}</label>
+	                                <!-- <select class="form-control select2" style="width: 100%;">
+	                                                <option selected="selected">Alabama</option>
+	                                                <option>Alaska</option>
+	                                                <option disabled="disabled">California (disabled)</option>
+	                                                <option>Delaware</option>
+	                                                <option>Tennessee</option>
+	                                                <option>Texas</option>
+	                                                <option>Washington</option>
+	                                            </select> -->
+	                                <select class="form-control select2" id="idStatus">
+	                                    <option value="" selected="selected">{{ 'SECUSER.SEARCH.USER_TYPE.SELECT' | translate }}</option>
+	                                    <option value="PROCESSD">{{ 'SECUSER.SEARCH.STATUS.PROCESSD' | translate }}</option>
+	                                    <option value="VERIFIED">{{ 'SECUSER.SEARCH.STATUS.VERIFIED' | translate }}</option>
+	                                    <option value="DELETED">{{ 'SECUSER.SEARCH.STATUS.DELETE' | translate }}</option>
+	
+	                                </select>
+	                            </div>
+	
+	                            <!-- /.form-group -->
+	                        </div>
+	                        <!-- /.col -->
+	                    </div>
+	
+	                </div>
+	                <!-- /.card-body -->
+	                <div class="card-footer clearfix">
+	                    <!-- <button type="button" class="btn btn-info float-right"><i class="fas fa-plus-square"></i> Add
+	                                    item</button> -->
+	                   <button type="button" class="btn btn-primary action-btn float-right" (click)="clear()">
+	                   {{ 'BUTTON.CLEAR' | translate }}
+	                      </button>
+	                    <button type="button" class="btn btn-primary action-btn float-right" (click)="search()">
+	
+	                      {{ 'BUTTON.SEARCH' | translate }}
+	                    </button>
+	
+	
+	                </div>
+	                <!-- /.card-footer-->
+	            </div>
+	        </div>
+	        <div class="col-md-12">
+	            <!-- <div class="">
+	                            <div class="grid-header">
+	                                <div class="col-md-10" style="padding-right: 0px; padding-left: 0px">
+	                                    <span class="grid-title">User Search Results</span>
+	                                </div>
+	
+	                            </div>
+	                            <div class="">
+	                                <div class="row">
+	                                    <div class="col-md-12">
+	                                        <table id="userList"
+	                                            class="table table-bordered table-hover dataTable responsive nowrap">
+	                                            <thead id="id-table-head">
+	                                                <tr>
+	
+	                                                    <th *ngFor="let head of initialHead">{{head.name}}</th>
+	                                                </tr>
+	                                            </thead>
+	                                            <tbody>
+	                                            </tbody>
+	                                        </table>
+	                                    </div>
+	                                </div>
+	
+	                                <div class=" float-right btn_data ">
+	                                    <div class="Col-md-12 bn_00">
+	                                        <div class="x_line"></div>
+	                                        <div class="pull-right ">
+	
+	
+	                                            <button type="button" class="btn btn-success btn-sm addUser"
+	                                                id="ie-user-search-add" (click)="createUser()">Create</button>
+	
+	                                            <button type="button" class="btn btn-success btn-sm editUser"
+	                                                id="ie-user-search-edit" (click)="updateUser()">Update</button>
+	
+	                                            <button type="button" class="btn btn-success btn-sm deleteUser"
+	                                                id="ie-user-search-delete" (click)="Verify()">Verify</button>
+	
+	                                            <button type="button" class="btn btn-warning btn-sm"
+	                                                id="ie-user-search-delete" (click)="deleteUser()">Delete</button>
+	
+	
+	                                        </div>
+	
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div> -->
+	
+	            <div class="card ipsh-card">
+	                <div class="card-header">
+	                    <h3 class="card-title">
+	                        <i class="far fa-address-card mr-2 fa-icon-gradient-default"></i>{{ 'SECUSER.LABEL' | translate }}</h3>
+	
+	                    <div class="card-tools">
+	                        <button type="button" class="btn btn-tool" (click)="addColumn()">
+	                            <i class="fas fa-plus-square"></i>
+	                            <div class="add-dropdown-menu"
+	                                [ngClass]="{'dropdown-menu-show': coloumDropdown,'dropdown-menu-hide': !coloumDropdown}">
+	                                <div *ngFor="let head of initialHead;let i=index;">
+	                                    <input type="checkbox" id=id_{{i}} class="filled-in" [value]="i" name="hide"
+	                                        [(ngModel)]="head.isSelected" (change)="showHideColoum($event,head)">
+	                                    <label for=id_{{i}}> {{ get(head.name) | translate }}</label>
+	                                </div>
+	                                <div class="divider"></div>
+	                                <div>
+	                                    <button type="button" id="id_save1" class="btn btn-primary btn-block btn-sm"
+	                                        (click)="saveChanges(0)">{{ 'BUTTON.OK' | translate }}</button>
+	                                </div>
+	                            </div>
+	                        </button>
+	                        <button type="button" class="btn btn-tool" (click)="saveChanges(1)">
+	                            <i class="fas fa-save"></i>
+	                        </button>
+	                    </div>
+	                </div>
+	                <!-- /.card-header -->
+	                <div class="card-body">
+	
+	                    <div class="row mb-2">
+	                        <div class="col-md-12">
+	                            <div class="bs-example">
+	                                <ul class="nav nav-pills table-status-badge">
+	                                    <li class="nav-item">
+	                                        <a class="nav-link active" (click)="refreshByStatus('')">
+	                                          {{ 'GRIDSTATUS.ALL' | translate }}:{{ statusCountList.totalStatus }}
+	                                        </a>
+	                                    </li>
+	                                    <li class="nav-item">
+	                                        <a class="nav-link" (click)="refreshByStatus('PROCESSD')">
+	                                          {{ 'GRIDSTATUS.PENDING_APPROVAL' | translate }}
+	                                          <span class="badge badge-light ipsh-badge-pending">
+	                                            {{ statusCountList.processd }}
+	                                          </span>
+	                                        </a>
+	                                    </li>
+	                                    <li class="nav-item" >
+	                                        <a class="nav-link" (click)="refreshByStatus('VERIFIED')">
+	                                          {{ 'GRIDSTATUS.APPROVED' | translate }}
+	                                          <span class="badge badge-primary ipsh-badge-approve">
+	                                            {{ statusCountList.verified }}
+	                                          </span>
+	                                        </a>
+	                                    </li>
+	                                    <li class="nav-item" >
+	                                      <a class="nav-link" (click)="refreshByStatus('DELETED')">
+	                                        {{ 'GRIDSTATUS.DELETED' | translate }}
+	                                        <span class="badge badge-primary ipsh-badge-delete">
+	                                          {{ statusCountList.deleted }}
+	                                        </span>
+	                                      </a>
+	                                  </li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	
+	                    <div class="table-responsive">
+	                        <table id="userList"
+	                            class="table table-bordered table-hover dataTable responsive nowrap ipsh-grid">
+	                            <thead id="id-table-head">
+	                                <tr>
+	                                    <th *ngFor="let head of initialHead">{{ get(head.name) | translate }}</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                    <!-- /.table-responsive -->
+	                </div>
+	                <!-- /.card-body -->
+	                <div class="card-footer clearfix">
+	                    <!-- <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a> -->
+	                    <!-- <a href="javascript:void(0)"
+	                                    class="btn btn-sm btn-secondary float-right action-btn" (click)="deleteUser()">Delete</a>
+	                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary action-btn float-right" (click)="Verify()">Verify
+	                                    Orders</a>
+	                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary action-btn float-right" (click)="updateUser()">Update
+	                                    Orders</a>
+	                                <a href="javascript:void(0)" class="btn btn-sm btn-secondary action-btn float-right" (click)="createUser()">Create
+	                                    Orders</a> -->
+	
+	                    <button type="button" class="btn btn-secondary action-btn float-right" (click)="deleteUser()">
+	
+	                      {{ 'BUTTON.DELETE' | translate }}
+	                    </button>
+	                    <button type="button" class="btn btn-secondary action-btn float-right" (click)="Verify()">
+	
+	                      {{ 'BUTTON.VERIFY' | translate }}
+	                    </button>
+	                    <button type="button" class="btn btn-primary action-btn float-right" (click)="updateUser()">
+	
+	                      {{ 'BUTTON.UPDATE' | translate }}
+	                    </button>
+	                    <button type="button" class="btn btn-primary action-btn float-right" (click)="createUser()">
+	
+	                      {{ 'BUTTON.CREATE' | translate }}
+	                    </button>
+	                </div>
+	                <!-- /.card-footer -->
+	            </div>
+	        </div>
+	    </div>
+	
+	    <div class="modal fade" data-backdrop="static" id="delete-user-modal" tabindex="-1" role="dialog">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h4 class="modal-title">{{ 'SECUSER.MODAL.DELETE.LABEL' | translate }}</h4>
+	                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                        <span aria-hidden="true">&times;</span>
+	                    </button>
+	                </div>
+	                <div class="modal-body">
+	                    <p> {{ 'SECUSER.MODAL.DELETE.CONFIRMATION' | translate }}</p>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-secondary action-btn float-right" data-dismiss="modal"
+	                        (click)="cancelDeleteUser()">{{ 'BUTTON.NO' | translate }}</button>
+	                    <button type="button" class="btn btn-primary action-btn float-right"
+	                        (click)="confirmDeleteUser()">{{ 'BUTTON.YES' | translate }}</button>
+	                </div>
+	            </div>
+	            <!-- /.modal-content -->
+	        </div>
+	        <!-- /.modal-dialog -->
+	    </div>
+	    
+	
+	    <div class="row" *ngIf="screenPermissions.dspFl == 'N'">
+	      <div class="col-md-12">
+	        <img style="    width: 100%;" src="assets\resources\img\access_denied.jpg">
+	      </div>
+	    </div>
+	
+	</section>
+	
+}
+

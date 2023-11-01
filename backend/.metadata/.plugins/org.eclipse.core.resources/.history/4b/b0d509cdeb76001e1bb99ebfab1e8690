@@ -1,0 +1,14 @@
+package com.example.demo.service;
+
+import org.json.simple.JSONObject;
+
+import com.example.demo.dto.ManagementDto;
+import com.example.demo.dto.ServiceResponse;
+
+public interface HotelManagementService {
+	
+	JSONObject getData(String param);
+	ServiceResponse createUser(ManagementDto obj);
+
+
+}
